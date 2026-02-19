@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>Hexo 搭建与使用指南（含常用命令） | hudiejianl&#39;s blog</title>
+    <meta name="author" content="hudiejianl" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar1.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>HUDIEJIANL&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;HUDIEJIANL&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Hexo 搭建与使用指南（含常用命令）</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/2/19
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E6%95%99%E7%A8%8B/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                教程
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Hexo/" style="color: #00bcd4">
+                    Hexo
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Blog/" style="color: #03a9f4">
+                    Blog
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="1-Hexo-是什么"><a href="#1-Hexo-是什么" class="headerlink" title="1. Hexo 是什么"></a>1. Hexo 是什么</h2><p>Hexo 是一个基于 Node.js 的静态博客框架：</p>
+<ul>
+<li>写作时用 Markdown</li>
+<li>生成时把内容编译成静态 HTML&#x2F;CSS&#x2F;JS</li>
+<li>部署时把 <code>public/</code> 推到 GitHub Pages、Vercel、服务器等</li>
+</ul>
+<p>适合做个人博客、笔记站点、技术文档。</p>
+<h2 id="2-准备环境"><a href="#2-准备环境" class="headerlink" title="2. 准备环境"></a>2. 准备环境</h2><p>你需要：</p>
+<ul>
+<li>Node.js（建议 LTS）</li>
+<li>包管理器（<code>pnpm</code>&#x2F;<code>npm</code>&#x2F;<code>yarn</code> 任选其一）</li>
+<li>Git（如果要部署到 GitHub Pages）</li>
+</ul>
+<p>检查版本：</p>
+<pre><code class="language-bash">node -v
+pnpm -v
+git --version
+</code></pre>
+<h2 id="3-初始化一个-Hexo-博客"><a href="#3-初始化一个-Hexo-博客" class="headerlink" title="3. 初始化一个 Hexo 博客"></a>3. 初始化一个 Hexo 博客</h2><h3 id="3-1-全局安装-Hexo-CLI（可选）"><a href="#3-1-全局安装-Hexo-CLI（可选）" class="headerlink" title="3.1 全局安装 Hexo CLI（可选）"></a>3.1 全局安装 Hexo CLI（可选）</h3><p>如果你习惯全局命令：</p>
+<pre><code class="language-bash">pnpm add -g hexo-cli
+</code></pre>
+<p>之后可以直接用：</p>
+<pre><code class="language-bash">hexo -v
+</code></pre>
+<p>如果你不想全局安装，也可以用 <code>pnpm exec hexo ...</code>（下面命令会同时给两种写法）。</p>
+<h3 id="3-2-新建站点"><a href="#3-2-新建站点" class="headerlink" title="3.2 新建站点"></a>3.2 新建站点</h3><pre><code class="language-bash">hexo init my-blog
+cd my-blog
+pnpm install
+</code></pre>
+<p>启动本地服务：</p>
+<pre><code class="language-bash">hexo server
+# 或者：pnpm exec hexo server
+</code></pre>
+<p>默认访问：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a></li>
+</ul>
+<h2 id="4-项目结构速览"><a href="#4-项目结构速览" class="headerlink" title="4. 项目结构速览"></a>4. 项目结构速览</h2><p>常见目录：</p>
+<ul>
+<li><code>source/</code>：你的内容<ul>
+<li><code>_posts/</code>：文章（每篇一个 <code>.md</code>）</li>
+<li>例如：<code>about/index.md</code>：页面（Page）</li>
+</ul>
+</li>
+<li><code>themes/</code>：主题</li>
+<li><code>_config.yml</code>：站点主配置（title、url、主题、部署等）</li>
+<li><code>public/</code>：生成后的静态文件（部署用）</li>
+</ul>
+<h2 id="5-写作：新建文章与页面"><a href="#5-写作：新建文章与页面" class="headerlink" title="5. 写作：新建文章与页面"></a>5. 写作：新建文章与页面</h2><h3 id="5-1-新建文章"><a href="#5-1-新建文章" class="headerlink" title="5.1 新建文章"></a>5.1 新建文章</h3><pre><code class="language-bash">hexo new post &quot;我的第一篇文章&quot;
+# 或者：pnpm exec hexo new post &quot;我的第一篇文章&quot;
+</code></pre>
+<p>生成文件位置：</p>
+<ul>
+<li><code>source/_posts/我的第一篇文章.md</code></li>
+</ul>
+<h3 id="5-2-新建页面（例如-about）"><a href="#5-2-新建页面（例如-about）" class="headerlink" title="5.2 新建页面（例如 about）"></a>5.2 新建页面（例如 about）</h3><pre><code class="language-bash">hexo new page about
+# 或者：pnpm exec hexo new page about
+</code></pre>
+<p>生成目录：</p>
+<ul>
+<li><code>source/about/index.md</code></li>
+</ul>
+<h2 id="6-常用命令清单（最常用）"><a href="#6-常用命令清单（最常用）" class="headerlink" title="6. 常用命令清单（最常用）"></a>6. 常用命令清单（最常用）</h2><h3 id="6-1-本地预览"><a href="#6-1-本地预览" class="headerlink" title="6.1 本地预览"></a>6.1 本地预览</h3><pre><code class="language-bash">hexo server
+# 或者：pnpm exec hexo server
+</code></pre>
+<p>常用参数：</p>
+<ul>
+<li><code>-p 4001</code>：换端口</li>
+<li><code>-o</code>：启动后自动打开浏览器</li>
+</ul>
+<h3 id="6-2-清理缓存"><a href="#6-2-清理缓存" class="headerlink" title="6.2 清理缓存"></a>6.2 清理缓存</h3><p>当你发现页面没更新、主题资源异常时，先清理：</p>
+<pre><code class="language-bash">hexo clean
+# 或者：pnpm exec hexo clean
+</code></pre>
+<h3 id="6-3-生成静态文件"><a href="#6-3-生成静态文件" class="headerlink" title="6.3 生成静态文件"></a>6.3 生成静态文件</h3><pre><code class="language-bash">hexo generate
+# 或者：pnpm exec hexo generate
+</code></pre>
+<p>输出目录：</p>
+<ul>
+<li><code>public/</code></li>
+</ul>
+<h3 id="6-4-部署"><a href="#6-4-部署" class="headerlink" title="6.4 部署"></a>6.4 部署</h3><pre><code class="language-bash">hexo deploy
+# 或者：pnpm exec hexo deploy
+</code></pre>
+<p>通常会把 <code>public/</code> 推送到你配置的远程仓库&#x2F;分支。</p>
+<h2 id="7-配置：你最常改的几个点"><a href="#7-配置：你最常改的几个点" class="headerlink" title="7. 配置：你最常改的几个点"></a>7. 配置：你最常改的几个点</h2><p>站点根配置在 <code>_config.yml</code>，常见字段：</p>
+<ul>
+<li><code>title</code>：站点标题</li>
+<li><code>subtitle</code>：副标题</li>
+<li><code>description</code>：描述（部分主题会显示）</li>
+<li><code>url</code>：你的站点域名（GitHub Pages 一定要正确）</li>
+<li><code>theme</code>：主题名（<code>themes/</code> 目录下的文件夹名）</li>
+</ul>
+<p>固定链接：</p>
+<pre><code class="language-yml">permalink: :year/:month/:day/:title/
+</code></pre>
+<h2 id="8-主题：安装与切换"><a href="#8-主题：安装与切换" class="headerlink" title="8. 主题：安装与切换"></a>8. 主题：安装与切换</h2><h3 id="8-1-安装主题"><a href="#8-1-安装主题" class="headerlink" title="8.1 安装主题"></a>8.1 安装主题</h3><p>常见方式：</p>
+<ul>
+<li>下载主题到 <code>themes/&lt;theme-name&gt;/</code></li>
+<li>在 <code>_config.yml</code> 里设置：</li>
+</ul>
+<pre><code class="language-yml">theme: &lt;theme-name&gt;
+</code></pre>
+<h3 id="8-2-主题配置"><a href="#8-2-主题配置" class="headerlink" title="8.2 主题配置"></a>8.2 主题配置</h3><p>大多数主题会在 <code>themes/&lt;theme-name&gt;/_config.yml</code> 提供主题专属配置（菜单、头像、背景、评论等）。</p>
+<h2 id="9-部署到-GitHub-Pages（一键部署）"><a href="#9-部署到-GitHub-Pages（一键部署）" class="headerlink" title="9. 部署到 GitHub Pages（一键部署）"></a>9. 部署到 GitHub Pages（一键部署）</h2><p>如果你使用 <code>hexo-deployer-git</code>，流程一般是：</p>
+<ol>
+<li>安装部署插件</li>
+</ol>
+<pre><code class="language-bash">pnpm add -D hexo-deployer-git
+</code></pre>
+<ol start="2">
+<li>配置 <code>_config.yml</code></li>
+</ol>
+<pre><code class="language-yml">deploy:
+  type: git
+  repo: git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git
+  branch: main
+</code></pre>
+<ol start="3">
+<li>执行部署</li>
+</ol>
+<pre><code class="language-bash">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy
+</code></pre>
+<p>如果你像我这个仓库一样在 <code>package.json</code> 配了脚本，也可以直接：</p>
+<pre><code class="language-bash">pnpm clean
+pnpm build
+pnpm deploy
+</code></pre>
+<h2 id="10-常见问题"><a href="#10-常见问题" class="headerlink" title="10. 常见问题"></a>10. 常见问题</h2><h3 id="10-1-部署时报权限错误"><a href="#10-1-部署时报权限错误" class="headerlink" title="10.1 部署时报权限错误"></a>10.1 部署时报权限错误</h3><p>如果 <code>repo</code> 用的是 SSH（<code>git@github.com:...</code>），要确认：</p>
+<ul>
+<li>你本机已经配置 SSH key</li>
+<li>GitHub 已添加公钥</li>
+</ul>
+<h3 id="10-2-改了内容但页面没变"><a href="#10-2-改了内容但页面没变" class="headerlink" title="10.2 改了内容但页面没变"></a>10.2 改了内容但页面没变</h3><p>按顺序排查：</p>
+<ul>
+<li><code>hexo clean</code></li>
+<li><code>hexo generate</code></li>
+<li>重新 <code>hexo server</code> 看本地是否正常</li>
+</ul>
+<hr>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 hudiejianl&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;hudiejianl
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
