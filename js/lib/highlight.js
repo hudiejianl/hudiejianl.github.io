@@ -13,6 +13,11 @@ mixins.highlight = {
         highlight() {
             let codes = document.querySelectorAll("pre");
             for (let i of codes) {
+                if (i.dataset && i.dataset.pxHighlighted === "1") continue;
+                if (i.querySelector && i.querySelector(".code-content")) {
+                    if (i.dataset) i.dataset.pxHighlighted = "1";
+                    continue;
+                }
                 let code = i.textContent;
                 let language = [...i.classList, ...i.firstChild.classList][0] || "plaintext";
                 let highlighted;
@@ -29,6 +34,7 @@ mixins.highlight = {
                     <i class="fa-solid fa-check fa-fw"></i>
                 </div>
                 `;
+                if (i.dataset) i.dataset.pxHighlighted = "1";
                 let content = i.querySelector(".code-content");
                 hljs.lineNumbersBlock(content, { singleLine: true });
                 let copycode = i.querySelector(".copycode");

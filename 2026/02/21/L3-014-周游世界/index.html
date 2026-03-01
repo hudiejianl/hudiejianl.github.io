@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>L3-014 周游世界 | hudiejianl&#39;s blog</title>
+    <meta name="author" content="hudiejianl" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/02.png" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>HUDIEJIANL&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;HUDIEJIANL&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>L3-014 周游世界</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/2/21
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                算法
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E7%AE%97%E6%B3%95/" style="color: #ffa2c4">
+                    算法
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B/" style="color: #00a596">
+                    团体程序设计天梯赛
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="L3-014-周游世界"><a href="#L3-014-周游世界" class="headerlink" title="L3-014 周游世界"></a>L3-014 周游世界</h2><p> 周游世界是件浪漫事，但规划旅行路线就不一定了…… 全世界有成千上万条航线、铁路线、大巴线，令人眼花缭乱。所以旅行社会选择部分运输公司组成联盟，每家公司提供一条线路，然后帮助客户规划由联盟内企业支持的旅行路线。本题就要求你帮旅行社实现一个自动规划路线的程序，使得对任何给定的起点和终点，可以找出最顺畅的路线。所谓“最顺畅”，首先是指中途经停站最少；如果经停站一样多，则取需要换乘线路次数最少的路线。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行给出一个正整数<em>N</em>（≤100），即联盟公司的数量。接下来有<em>N</em>行，第<em>i</em>行（<em>i</em>&#x3D;1,⋯,<em>N</em>）描述了第<em>i</em>家公司所提供的线路。格式为：</p>
+<p><em>M</em> S[1] S[2] ⋯ S[<em>M</em>]</p>
+<p>其中<em>M</em>（≤100）是经停站的数量，S[<em>i</em>]（<em>i</em>&#x3D;1,⋯,<em>M</em>）是经停站的编号（由4位0-9的数字组成）。这里假设每条线路都是简单的一条可以双向运行的链路，并且输入保证是按照正确的经停顺序给出的 —— 也就是说，任意一对相邻的S[<em>i</em>]和S[<em>i</em>+1]（<em>i</em>&#x3D;1,⋯,<em>M</em>−1）之间都不存在其他经停站点。我们称相邻站点之间的线路为一个运营区间，每个运营区间只承包给一家公司。环线是有可能存在的，但不会不经停任何中间站点就从出发地回到出发地。当然，不同公司的线路是可能在某些站点有交叉的，这些站点就是客户的换乘点，我们假设任意换乘点涉及的不同公司的线路都不超过5条。</p>
+<p>在描述了联盟线路之后，题目将给出一个正整数<em>K</em>（≤10），随后<em>K</em>行，每行给出一位客户的需求，即始发地的编号和目的地的编号，中间以一空格分隔。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>处理每一位客户的需求。如果没有现成的线路可以使其到达目的地，就在一行中输出“Sorry, no line is available.”；如果目的地可达，则首先在一行中输出最顺畅路线的经停站数量（始发地和目的地不包括在内），然后按下列格式给出旅行路线：</p>
+<pre><code>Go by the line of company #X1 from S1 to S2.
+Go by the line of company #X2 from S2 to S3.
+......
+</code></pre>
+<p>其中<code>Xi</code>是线路承包公司的编号，<code>Si</code>是经停站的编号。但必须只输出始发地、换乘点和目的地，不能输出中间的经停站。题目保证满足要求的路线是唯一的。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><pre><code>4
+
+7 1001 3212 1003 1204 1005 1306 7797
+
+9 9988 2333 1204 2006 2005 2004 2003 2302 2001
+
+13 3011 3812 3013 3001 1306 3003 2333 3066 3212 3008 2302 3010 3011
+
+4 6666 8432 4011 1306
+
+4
+
+3011 3013
+
+6666 2001
+
+2004 3001
+
+2222 6666
+</code></pre>
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><pre><code>2
+
+Go by the line of company #3 from 3011 to 3013.
+
+10
+
+Go by the line of company #4 from 6666 to 1306.
+
+Go by the line of company #3 from 1306 to 2302.
+
+Go by the line of company #2 from 2302 to 2001.
+
+6
+
+Go by the line of company #2 from 2004 to 1204.
+
+Go by the line of company #1 from 1204 to 1306.
+
+Go by the line of company #3 from 1306 to 3001.
+
+Sorry, no line is available.
+</code></pre>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>本题是一个典型的 <strong>多条件最短路径</strong>：</p>
+<ol>
+<li><strong>最少经停站数</strong>（等价于最少经过的边数；最后输出时不包含起点与终点，所以答案是“边数 - 1”）</li>
+<li>若经停站数相同，则 <strong>最少换乘次数</strong>（换乘&#x3D;相邻两段区间所属公司不同）</li>
+</ol>
+<p>题目还要求输出路线时：</p>
+<ul>
+<li>只能输出 <strong>起点、换乘点、终点</strong></li>
+<li>每一段需要输出使用哪家公司的线路</li>
+</ul>
+<p>题目保证最优解唯一。</p>
+<h3 id="1-建模"><a href="#1-建模" class="headerlink" title="1) 建模"></a>1) 建模</h3><p>把每个站点看成图的节点。对于每家公司给的线路 <code>S1 S2 ... SM</code>：</p>
+<ul>
+<li>对每一对相邻站点 <code>(Sj, Sj+1)</code> 建一条 <strong>双向边</strong></li>
+<li>这条边属于公司 <code>i</code>（后续计算换乘要用）</li>
+</ul>
+<p>由于站点编号是 4 位字符串，建议用 <code>unordered_map&lt;string,int&gt;</code> 做离散化映射到 <code>[0..V-1]</code>。</p>
+<p><strong>边的存储建议</strong>：</p>
+<ul>
+<li><code>adj[u]</code> 存若干条 <code>{v, companyId}</code></li>
+<li>题目说每个运营区间只承包给一家公司，所以同一条相邻站点边的 company 是确定的</li>
+</ul>
+<h3 id="2-为什么“只用经停站数”会超时"><a href="#2-为什么“只用经停站数”会超时" class="headerlink" title="2) 为什么“只用经停站数”会超时"></a>2) 为什么“只用经停站数”会超时</h3><p>如果优先队列（Dijkstra）里只记录“到达某站的最少边数”，那么当边数相同时，无法利用“换乘次数”做有效剪枝：</p>
+<ul>
+<li>你可能会多次以相同边数到达同一站点，但来自不同公司</li>
+<li>这些状态在后续扩展时会产生不同换乘代价</li>
+<li>如果不把它们区分并用更强的判定更新，队列里会堆积大量无效状态，容易 TLE</li>
+</ul>
+<p>因此正确且稳定的做法是：把 <strong>换乘次数也纳入最短路的比较</strong>，并在状态中携带“上一段所用公司”。</p>
+<h3 id="3-状态设计（推荐写法）"><a href="#3-状态设计（推荐写法）" class="headerlink" title="3) 状态设计（推荐写法）"></a>3) 状态设计（推荐写法）</h3><p>只用 <code>dist[站点]</code> 会丢信息：同一站点、同样的边数下，“最后乘坐的公司不同”会导致后续换乘次数不同。</p>
+<p>因此建议把状态扩展为：</p>
+<ul>
+<li><code>dist[u][c] = (edges, transfers)</code></li>
+<li>表示到达站点 <code>u</code> 且最后一段乘坐公司为 <code>c</code> 时的最优代价</li>
+</ul>
+<p>比较规则是 <strong>字典序最小</strong>：先 <code>edges</code>，再 <code>transfers</code>。</p>
+<h3 id="4-路径记录与输出（只输出起点-换乘点-终点）"><a href="#4-路径记录与输出（只输出起点-换乘点-终点）" class="headerlink" title="4) 路径记录与输出（只输出起点&#x2F;换乘点&#x2F;终点）"></a>4) 路径记录与输出（只输出起点&#x2F;换乘点&#x2F;终点）</h3><p>在更新 <code>dist[v][nc]</code> 时同步记录父指针：</p>
+<ul>
+<li><code>preNode[v][nc] = u</code></li>
+<li><code>preComp[v][nc] = c</code></li>
+</ul>
+<p>回溯出完整路径后，再按“公司变化点”切段输出。</p>
+<p>经停站数量输出：</p>
+<ul>
+<li>若最短路径边数为 <code>edges</code>，则经停站数（不含起点终点）为 <code>edges - 1</code></li>
+</ul>
+<h3 id="5-参考实现（C-）"><a href="#5-参考实现（C-）" class="headerlink" title="5) 参考实现（C++）"></a>5) 参考实现（C++）</h3><pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+struct Edge {
+    int v;
+    int comp;
+};
+
+struct State {
+    int u;
+    int last;
+    int edges;
+    int trans;
+};
+
+struct Cmp {
+    bool operator()(const State&amp; a, const State&amp; b) const {
+        if (a.edges != b.edges) return a.edges &gt; b.edges;
+        return a.trans &gt; b.trans;
+    }
+};
+
+static const int INF = 1e9;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int N;
+    cin &gt;&gt; N;
+
+    unordered_map&lt;string, int&gt; id;
+    vector&lt;string&gt; rid;
+
+    auto getId = [&amp;](const string&amp; s) -&gt; int {
+        auto it = id.find(s);
+        if (it != id.end()) return it-&gt;second;
+        int x = (int)rid.size();
+        id[s] = x;
+        rid.push_back(s);
+        return x;
+    };
+
+    vector&lt;vector&lt;Edge&gt;&gt; adj;
+    auto ensure = [&amp;](int x) {
+        if ((int)adj.size() &lt;= x) adj.resize(x + 1);
+    };
+
+    for (int i = 1; i &lt;= N; i++) {
+        int M;
+        cin &gt;&gt; M;
+        string prev;
+        cin &gt;&gt; prev;
+        int u = getId(prev);
+        ensure(u);
+        for (int j = 1; j &lt; M; j++) {
+            string cur;
+            cin &gt;&gt; cur;
+            int v = getId(cur);
+            ensure(v);
+            adj[u].push_back({v, i});
+            adj[v].push_back({u, i});
+            u = v;
+        }
+    }
+
+    int K;
+    cin &gt;&gt; K;
+    while (K--) {
+        string S, T;
+        cin &gt;&gt; S &gt;&gt; T;
+        if (!id.count(S) || !id.count(T)) {
+            cout &lt;&lt; &quot;Sorry, no line is available.\n&quot;;
+            continue;
+        }
+
+        int s = id[S], t = id[T];
+        int V = (int)adj.size();
+
+        vector&lt;vector&lt;int&gt;&gt; distE(V, vector&lt;int&gt;(N + 1, INF));
+        vector&lt;vector&lt;int&gt;&gt; distT(V, vector&lt;int&gt;(N + 1, INF));
+        vector&lt;vector&lt;int&gt;&gt; preNode(V, vector&lt;int&gt;(N + 1, -1));
+        vector&lt;vector&lt;int&gt;&gt; preComp(V, vector&lt;int&gt;(N + 1, -1));
+
+        priority_queue&lt;State, vector&lt;State&gt;, Cmp&gt; pq;
+        distE[s][0] = 0;
+        distT[s][0] = 0;
+        pq.push({s, 0, 0, 0});
+
+        while (!pq.empty()) {
+            auto cur = pq.top();
+            pq.pop();
+            int u = cur.u, last = cur.last;
+            if (cur.edges != distE[u][last] || cur.trans != distT[u][last]) continue;
+            for (auto e : adj[u]) {
+                int v = e.v, nc = e.comp;
+                int ne = cur.edges + 1;
+                int nt = cur.trans + ((last != 0 &amp;&amp; last != nc) ? 1 : 0);
+                if (ne &lt; distE[v][nc] || (ne == distE[v][nc] &amp;&amp; nt &lt; distT[v][nc])) {
+                    distE[v][nc] = ne;
+                    distT[v][nc] = nt;
+                    preNode[v][nc] = u;
+                    preComp[v][nc] = last;
+                    pq.push({v, nc, ne, nt});
+                }
+            }
+        }
+
+        int bestC = -1;
+        for (int c = 1; c &lt;= N; c++) {
+            if (distE[t][c] == INF) continue;
+            if (bestC == -1 || distE[t][c] &lt; distE[t][bestC] ||
+                (distE[t][c] == distE[t][bestC] &amp;&amp; distT[t][c] &lt; distT[t][bestC])) {
+                bestC = c;
+            }
+        }
+
+        if (bestC == -1) {
+            cout &lt;&lt; &quot;Sorry, no line is available.\n&quot;;
+            continue;
+        }
+
+        vector&lt;int&gt; nodes;
+        vector&lt;int&gt; comps;
+        int cu = t, cc = bestC;
+        while (!(cu == s &amp;&amp; cc == 0)) {
+            nodes.push_back(cu);
+            comps.push_back(cc);
+            int pu = preNode[cu][cc];
+            int pc = preComp[cu][cc];
+            cu = pu;
+            cc = pc;
+        }
+        nodes.push_back(s);
+        reverse(nodes.begin(), nodes.end());
+        reverse(comps.begin(), comps.end());
+
+        int edges = (int)nodes.size() - 1;
+        cout &lt;&lt; max(0, edges - 1) &lt;&lt; &quot;\n&quot;;
+
+        int i = 0;
+        while (i &lt; edges) {
+            int company = comps[i];
+            int j = i;
+            while (j &lt; edges &amp;&amp; comps[j] == company) j++;
+            cout &lt;&lt; &quot;Go by the line of company #&quot; &lt;&lt; company
+                 &lt;&lt; &quot; from &quot; &lt;&lt; rid[nodes[i]] &lt;&lt; &quot; to &quot; &lt;&lt; rid[nodes[j]] &lt;&lt; &quot;.\n&quot;;
+            i = j;
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+<h3 id="6-复杂度"><a href="#6-复杂度" class="headerlink" title="6) 复杂度"></a>6) 复杂度</h3><p>状态规模约为 <code>V * (N+1)</code>，Dijkstra 的复杂度约为：</p>
+<ul>
+<li><code>O((V*N + E*N) log (V*N))</code></li>
+</ul>
+<p>在本题约束下可以通过。</p>
+<h3 id="7-常见坑点"><a href="#7-常见坑点" class="headerlink" title="7) 常见坑点"></a>7) 常见坑点</h3><ol>
+<li>第一段不算换乘：只有 <code>last != 0 &amp;&amp; last != nc</code> 才 <code>+1</code>。</li>
+<li>输出经停站数：是 <code>edges - 1</code>（不含起点终点）。</li>
+<li>输出只包含起点&#x2F;换乘点&#x2F;终点：用“公司变化点”切段。</li>
+</ol>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 hudiejianl&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;hudiejianl
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

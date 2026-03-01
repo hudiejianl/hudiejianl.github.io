@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>Git 使用指南：从入门到常用命令速查 | hudiejianl&#39;s blog</title>
+    <meta name="author" content="hudiejianl" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/02.png" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>HUDIEJIANL&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;HUDIEJIANL&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Git 使用指南：从入门到常用命令速查</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/2/20
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E6%95%99%E7%A8%8B/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                教程
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/Git/" style="color: #ffa2c4">
+                    Git
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #00bcd4">
+                    工具
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="1-Git-是什么：你在解决什么问题"><a href="#1-Git-是什么：你在解决什么问题" class="headerlink" title="1. Git 是什么：你在解决什么问题"></a>1. Git 是什么：你在解决什么问题</h2><p>Git 是分布式版本控制系统，核心能力是：</p>
+<ul>
+<li>跟踪文件变更（历史记录）</li>
+<li>安全协作（分支、合并、Pull Request）</li>
+<li>随时回到过去（撤销、回滚、对比）</li>
+</ul>
+<blockquote>
+<p>术语速记：</p>
+<ul>
+<li><strong>Working Tree</strong>：工作区（你当前编辑的文件）</li>
+<li><strong>Staging Area</strong>：暂存区（<code>git add</code> 进去的变更）</li>
+<li><strong>Repository</strong>：本地仓库（<code>git commit</code> 形成的历史）</li>
+<li><strong>Remote</strong>：远程仓库（GitHub&#x2F;GitLab）</li>
+</ul>
+</blockquote>
+<h2 id="2-第一次使用：安装与基础配置"><a href="#2-第一次使用：安装与基础配置" class="headerlink" title="2. 第一次使用：安装与基础配置"></a>2. 第一次使用：安装与基础配置</h2><h3 id="2-1-检查-Git-是否可用"><a href="#2-1-检查-Git-是否可用" class="headerlink" title="2.1 检查 Git 是否可用"></a>2.1 检查 Git 是否可用</h3><pre><code class="language-bash">git --version
+</code></pre>
+<h3 id="2-2-配置用户名和邮箱（会写进提交记录）"><a href="#2-2-配置用户名和邮箱（会写进提交记录）" class="headerlink" title="2.2 配置用户名和邮箱（会写进提交记录）"></a>2.2 配置用户名和邮箱（会写进提交记录）</h3><pre><code class="language-bash">git config --global user.name &quot;hudiejianl&quot;
+git config --global user.email &quot;you@example.com&quot;
+</code></pre>
+<p>查看配置：</p>
+<pre><code class="language-bash">git config --global --list
+</code></pre>
+<h3 id="2-3（推荐）设置默认分支名为-main"><a href="#2-3（推荐）设置默认分支名为-main" class="headerlink" title="2.3（推荐）设置默认分支名为 main"></a>2.3（推荐）设置默认分支名为 main</h3><pre><code class="language-bash">git config --global init.defaultBranch main
+</code></pre>
+<h2 id="3-新建仓库-克隆仓库"><a href="#3-新建仓库-克隆仓库" class="headerlink" title="3. 新建仓库 &#x2F; 克隆仓库"></a>3. 新建仓库 &#x2F; 克隆仓库</h2><h3 id="3-1-在当前目录初始化仓库"><a href="#3-1-在当前目录初始化仓库" class="headerlink" title="3.1 在当前目录初始化仓库"></a>3.1 在当前目录初始化仓库</h3><pre><code class="language-bash">git init
+</code></pre>
+<h3 id="3-2-克隆远程仓库"><a href="#3-2-克隆远程仓库" class="headerlink" title="3.2 克隆远程仓库"></a>3.2 克隆远程仓库</h3><pre><code class="language-bash">git clone https://github.com/&lt;user&gt;/&lt;repo&gt;.git
+# 或 SSH：
+# git clone git@github.com:&lt;user&gt;/&lt;repo&gt;.git
+</code></pre>
+<h2 id="4-最常用的日常流程（必会）"><a href="#4-最常用的日常流程（必会）" class="headerlink" title="4. 最常用的日常流程（必会）"></a>4. 最常用的日常流程（必会）</h2><h3 id="4-1-查看状态与差异"><a href="#4-1-查看状态与差异" class="headerlink" title="4.1 查看状态与差异"></a>4.1 查看状态与差异</h3><pre><code class="language-bash">git status
+
+git diff            # 工作区 vs 暂存区
+
+git diff --staged   # 暂存区 vs 最后一次提交
+</code></pre>
+<h3 id="4-2-暂存与提交"><a href="#4-2-暂存与提交" class="headerlink" title="4.2 暂存与提交"></a>4.2 暂存与提交</h3><pre><code class="language-bash">git add .
+# 或精确到文件：git add path/to/file
+
+git commit -m &quot;feat: add git guide&quot;
+</code></pre>
+<h3 id="4-3-查看提交历史"><a href="#4-3-查看提交历史" class="headerlink" title="4.3 查看提交历史"></a>4.3 查看提交历史</h3><pre><code class="language-bash">git log
+
+git log --oneline --decorate --graph --all
+</code></pre>
+<h3 id="4-4-拉取与推送"><a href="#4-4-拉取与推送" class="headerlink" title="4.4 拉取与推送"></a>4.4 拉取与推送</h3><pre><code class="language-bash">git pull
+
+git push
+</code></pre>
+<blockquote>
+<p><strong>建议</strong>：<code>pull</code> 默认可能是 merge，也可能是 rebase，取决于你的配置；团队统一即可。</p>
+</blockquote>
+<h2 id="5-分支（branch）：并行开发的核心"><a href="#5-分支（branch）：并行开发的核心" class="headerlink" title="5. 分支（branch）：并行开发的核心"></a>5. 分支（branch）：并行开发的核心</h2><h3 id="5-1-查看-创建-切换分支"><a href="#5-1-查看-创建-切换分支" class="headerlink" title="5.1 查看&#x2F;创建&#x2F;切换分支"></a>5.1 查看&#x2F;创建&#x2F;切换分支</h3><pre><code class="language-bash">git branch              # 查看本地分支
+
+git branch -a           # 查看所有分支（含远程）
+
+git switch -c feature/login   # 创建并切换到新分支
+
+git switch main               # 切换分支
+</code></pre>
+<p>老命令等价写法：</p>
+<pre><code class="language-bash">git checkout -b feature/login
+</code></pre>
+<h3 id="5-2-合并分支（merge）"><a href="#5-2-合并分支（merge）" class="headerlink" title="5.2 合并分支（merge）"></a>5.2 合并分支（merge）</h3><p>把 <code>feature/login</code> 合并进当前分支：</p>
+<pre><code class="language-bash">git switch main
+git merge feature/login
+</code></pre>
+<h3 id="5-3-变基（rebase）：让历史更线性"><a href="#5-3-变基（rebase）：让历史更线性" class="headerlink" title="5.3 变基（rebase）：让历史更线性"></a>5.3 变基（rebase）：让历史更线性</h3><p>常见用法：把当前分支“追上”主分支：</p>
+<pre><code class="language-bash">git switch feature/login
+git fetch origin
+git rebase origin/main
+</code></pre>
+<p>发生冲突：</p>
+<ul>
+<li>解决冲突后</li>
+</ul>
+<pre><code class="language-bash">git add .
+git rebase --continue
+</code></pre>
+<p>放弃 rebase：</p>
+<pre><code class="language-bash">git rebase --abort
+</code></pre>
+<blockquote>
+<p><strong>建议</strong>：</p>
+<ul>
+<li>公共分支（大家都在用的分支）尽量不要随意 rebase（会改历史）</li>
+<li>个人 feature 分支 rebase 很常见，能保持历史干净</li>
+</ul>
+</blockquote>
+<h2 id="6-远程仓库（remote）：GitHub-协作"><a href="#6-远程仓库（remote）：GitHub-协作" class="headerlink" title="6. 远程仓库（remote）：GitHub 协作"></a>6. 远程仓库（remote）：GitHub 协作</h2><h3 id="6-1-查看远程"><a href="#6-1-查看远程" class="headerlink" title="6.1 查看远程"></a>6.1 查看远程</h3><pre><code class="language-bash">git remote -v
+</code></pre>
+<h3 id="6-2-添加远程"><a href="#6-2-添加远程" class="headerlink" title="6.2 添加远程"></a>6.2 添加远程</h3><pre><code class="language-bash">git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git
+</code></pre>
+<h3 id="6-3-推送本地分支到远程并建立追踪"><a href="#6-3-推送本地分支到远程并建立追踪" class="headerlink" title="6.3 推送本地分支到远程并建立追踪"></a>6.3 推送本地分支到远程并建立追踪</h3><pre><code class="language-bash">git push -u origin main
+# 推送当前分支：git push -u origin HEAD
+</code></pre>
+<h3 id="6-4-只拉取不合并"><a href="#6-4-只拉取不合并" class="headerlink" title="6.4 只拉取不合并"></a>6.4 只拉取不合并</h3><pre><code class="language-bash">git fetch origin
+</code></pre>
+<h2 id="7-撤销与回滚（高频！）"><a href="#7-撤销与回滚（高频！）" class="headerlink" title="7. 撤销与回滚（高频！）"></a>7. 撤销与回滚（高频！）</h2><h3 id="7-1-撤销工作区改动（未-add）"><a href="#7-1-撤销工作区改动（未-add）" class="headerlink" title="7.1 撤销工作区改动（未 add）"></a>7.1 撤销工作区改动（未 add）</h3><pre><code class="language-bash">git restore path/to/file
+# 全部：git restore .
+</code></pre>
+<h3 id="7-2-取消暂存（已-add，但未-commit）"><a href="#7-2-取消暂存（已-add，但未-commit）" class="headerlink" title="7.2 取消暂存（已 add，但未 commit）"></a>7.2 取消暂存（已 add，但未 commit）</h3><pre><code class="language-bash">git restore --staged path/to/file
+# 全部：git restore --staged .
+</code></pre>
+<h3 id="7-3-修改最近一次提交信息（未-push-时最安全）"><a href="#7-3-修改最近一次提交信息（未-push-时最安全）" class="headerlink" title="7.3 修改最近一次提交信息（未 push 时最安全）"></a>7.3 修改最近一次提交信息（未 push 时最安全）</h3><pre><code class="language-bash">git commit --amend
+</code></pre>
+<h3 id="7-4-回退到某个历史（reset）"><a href="#7-4-回退到某个历史（reset）" class="headerlink" title="7.4 回退到某个历史（reset）"></a>7.4 回退到某个历史（reset）</h3><ul>
+<li><strong>只回退提交指针，保留工作区</strong>（常用）</li>
+</ul>
+<pre><code class="language-bash">git reset --soft &lt;commit&gt;
+</code></pre>
+<ul>
+<li><strong>回退提交指针，保留工作区但清空暂存</strong></li>
+</ul>
+<pre><code class="language-bash">git reset --mixed &lt;commit&gt;
+</code></pre>
+<ul>
+<li><strong>危险：连工作区一起丢掉</strong></li>
+</ul>
+<pre><code class="language-bash">git reset --hard &lt;commit&gt;
+</code></pre>
+<blockquote>
+<p>如果你已经 <code>push</code> 到远程，谨慎用 <code>reset</code> 改历史；推荐用 <code>revert</code>。</p>
+</blockquote>
+<h3 id="7-5-反做一个提交（revert，适合已-push）"><a href="#7-5-反做一个提交（revert，适合已-push）" class="headerlink" title="7.5 反做一个提交（revert，适合已 push）"></a>7.5 反做一个提交（revert，适合已 push）</h3><pre><code class="language-bash">git revert &lt;commit&gt;
+</code></pre>
+<p><code>revert</code> 会生成一个新的提交来抵消旧提交，历史不会被“重写”。</p>
+<h2 id="8-暂存现场（stash）：临时切分任务"><a href="#8-暂存现场（stash）：临时切分任务" class="headerlink" title="8. 暂存现场（stash）：临时切分任务"></a>8. 暂存现场（stash）：临时切分任务</h2><pre><code class="language-bash">git stash push -m &quot;wip: half done&quot;
+
+git stash list
+
+git stash pop    # 应用并删除
+# 或：git stash apply 只应用不删除
+</code></pre>
+<h2 id="9-Tag：发布版本"><a href="#9-Tag：发布版本" class="headerlink" title="9. Tag：发布版本"></a>9. Tag：发布版本</h2><pre><code class="language-bash">git tag
+
+git tag v1.0.0
+
+git push origin v1.0.0
+# 推送所有 tag：git push origin --tags
+</code></pre>
+<h2 id="10-冲突怎么解决（实战流程）"><a href="#10-冲突怎么解决（实战流程）" class="headerlink" title="10. 冲突怎么解决（实战流程）"></a>10. 冲突怎么解决（实战流程）</h2><p>出现冲突时 Git 会把冲突文件标记出来：</p>
+<ol>
+<li><code>git status</code> 看冲突文件</li>
+<li>打开冲突文件，手动选择保留内容</li>
+<li><code>git add .</code></li>
+<li>根据你正在执行的操作：<ul>
+<li>merge：<code>git commit</code></li>
+<li>rebase：<code>git rebase --continue</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="11-常用命令速查表"><a href="#11-常用命令速查表" class="headerlink" title="11. 常用命令速查表"></a>11. 常用命令速查表</h2><h3 id="11-1-状态-日志-差异"><a href="#11-1-状态-日志-差异" class="headerlink" title="11.1 状态 &#x2F; 日志 &#x2F; 差异"></a>11.1 状态 &#x2F; 日志 &#x2F; 差异</h3><pre><code class="language-bash">git status
+
+git log --oneline --decorate --graph --all
+
+git diff
+
+git diff --staged
+</code></pre>
+<h3 id="11-2-分支"><a href="#11-2-分支" class="headerlink" title="11.2 分支"></a>11.2 分支</h3><pre><code class="language-bash">git branch
+
+git switch -c &lt;name&gt;
+
+git switch &lt;name&gt;
+
+git merge &lt;name&gt;
+
+git rebase &lt;upstream&gt;
+</code></pre>
+<h3 id="11-3-远程"><a href="#11-3-远程" class="headerlink" title="11.3 远程"></a>11.3 远程</h3><pre><code class="language-bash">git remote -v
+
+git fetch origin
+
+git pull
+
+git push
+</code></pre>
+<h3 id="11-4-撤销"><a href="#11-4-撤销" class="headerlink" title="11.4 撤销"></a>11.4 撤销</h3><pre><code class="language-bash">git restore .
+
+git restore --staged .
+
+git commit --amend
+
+git revert &lt;commit&gt;
+
+git reset --soft|--mixed|--hard &lt;commit&gt;
+</code></pre>
+<h2 id="12-推荐一个“够用”的协作工作流"><a href="#12-推荐一个“够用”的协作工作流" class="headerlink" title="12. 推荐一个“够用”的协作工作流"></a>12. 推荐一个“够用”的协作工作流</h2><ul>
+<li><code>main</code>：稳定分支</li>
+<li>开发新需求：<code>git switch -c feature/xxx</code></li>
+<li>开发中频繁提交（小步提交）</li>
+<li>发 PR &#x2F; 合并：用 merge 或 squash merge（团队统一）</li>
+<li>合并后删除 feature 分支</li>
+</ul>
+<hr>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 hudiejianl&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;hudiejianl
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
