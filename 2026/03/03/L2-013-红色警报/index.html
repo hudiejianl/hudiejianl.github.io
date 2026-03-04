@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <title>
-            tags | hudiejianl&#39;s blog
+            L2-013 红色警报 | hudiejianl&#39;s blog
         </title>
         <meta name="author" content="hudiejianl" />
         <meta name="description" content="" />
@@ -45,6 +45,8 @@
                                             <script src="/js/lib/highlight.js"></script>
                                             
                                                 
+                                                    <script src="/js/lib/toc.js"></script>
+                                                    
                                                         
                                                                 
                                                                     <script
@@ -53,8 +55,15 @@
                                                                         
                                                                                 
                                                                                         
+                                                                                            
+                                                                                                    
+                                                                                                            
+                                                                                                                    
                                                                                                                         
                                                                                                                                 
+                                                                                                                                    <script
+                                                                                                                                        src="/js/lib/reading-progress.js"></script>
+                                                                                                                                    
                                                                                                                                         <link
                                                                                                                                             rel="stylesheet"
                                                                                                                                             href="/css/main.css" />
@@ -176,84 +185,164 @@
 
 
                                         
+                                            <div id="reading-progress" class="reading-progress"
+                                                data-color="#37c6c0"
+                                                data-height="5px">
+                                                <div class="reading-progress-bar"></div>
+                                            </div>
+                                            
 
                                                 <div id="main"
                                                     :class="loading ? 'into-enter-from': 'into-enter-active'">
-                                                    <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/tags/%E7%AE%97%E6%B3%95/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
+                                                    
+    <div class="article has-toc">
+        <div class="article-main has-toc">
+            <div>
+                <h1>
+                    L2-013 红色警报
+                </h1>
+            </div>
+            <div class="info">
+                <span class="date">
+                    <span class="icon">
+                        <i class="fa-solid fa-calendar fa-fw"></i>
+                    </span>
+                    2026/3/3
                 </span>
-                算法
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                团体程序设计天梯赛
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/Hexo/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Hexo
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/Blog/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Blog
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/Git/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                Git
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                工具
-            </a>
-        </span>
-        
-        
-    </div>
-    
-</div>
+                
+                    <span class="category">
+                        <a href="/categories/%E7%AE%97%E6%B3%95/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            算法
+                        </a>
+                    </span>
+                    
+                        
+                            <span class="tags">
+                                <span class="icon">
+                                    <i class="fa-solid fa-tags fa-fw"></i>
+                                </span>
+                                
+                                    
+                                        <span class="tag">
+                                            
+                                                <a href="/tags/%E7%AE%97%E6%B3%95/" class="tag-link">
+                                                    算法
+                                                </a>
+                                        </span>
+                                        
+                                        <span class="tag">
+                                            
+                                                <a href="/tags/%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B/" class="tag-link">
+                                                    团体程序设计天梯赛
+                                                </a>
+                                        </span>
+                                        
+                            </span>
+                            
+            </div>
+            
+                        <div class="content" v-pre>
+                            <h2 id="L2-013-红色警报"><a href="#L2-013-红色警报" class="headerlink" title="L2-013 红色警报"></a>L2-013 红色警报</h2><p>战争中保持各个城市间的连通性非常重要。本题要求你编写一个报警程序，当失去一个城市导致国家被分裂为多个无法连通的区域时，就发出红色警报。注意：若该国本来就不完全连通，是分裂的k个区域，而失去一个城市并不改变其他城市之间的连通性，则不要发出警报。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行给出两个整数<code>N</code>（0 &lt; <code>N</code> ≤ 500）和<code>M</code>（≤ 5000），分别为城市个数（于是默认城市从0到<code>N</code>-1编号）和连接两城市的通路条数。随后<code>M</code>行，每行给出一条通路所连接的两个城市的编号，其间以1个空格分隔。在城市信息之后给出被攻占的信息，即一个正整数<code>K</code>和随后的<code>K</code>个被攻占的城市的编号。</p>
+<p>注意：输入保证给出的被攻占的城市编号都是合法的且无重复，但并不保证给出的通路没有重复。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>对每个被攻占的城市，如果它会改变整个国家的连通性，则输出<code>Red Alert: City k is lost!</code>，其中<code>k</code>是该城市的编号；否则只输出<code>City k is lost.</code>即可。如果该国失去了最后一个城市，则增加一行输出<code>Game Over.</code>。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><pre><code>5 4
 
+0 1
+
+1 3
+
+3 0
+
+0 4
+
+5
+
+1 2 0 4 3
+</code></pre>
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><pre><code>City 1 is lost.
+
+City 2 is lost.
+
+Red Alert: City 0 is lost!
+
+City 4 is lost.
+
+City 3 is lost.
+
+Game Over.
+</code></pre>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>这题可以采用“倒序恢复城市”的离线思路：</p>
+<ol>
+<li>先把所有将被攻占的城市标记为不可用，用剩余城市建图并初始化并查集。</li>
+<li>然后按被攻占顺序的逆序逐个“恢复”城市，把它与当前仍可用的邻居做合并。</li>
+<li>对于恢复的这个城市，统计它当前可连接到的连通块数量：<ul>
+<li>若数量大于 1，说明当初失去它会导致连通块数增加，需要输出红色警报。</li>
+<li>否则只输出普通提示。</li>
+</ul>
+</li>
+</ol>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="language-cpp">for(int i=0;i&lt;n;i++){
+        fa[i] = i;
+}
+
+for(int u=0;u&lt;n;u++){
+    if(blocked[u]) continue;
+    for(int v : g[u]){
+        if(blocked[v]) continue;
+        merge(u, v);
+    }
+}
+
+vector&lt;string&gt; ans;
+if(k==n){
+    ans.emplace_back(&quot;Game Over.&quot;);
+}
+for(int i=k;i&gt;0;i--){
+    set&lt;int&gt; f;
+    for(int y:g[solve[i]]){
+        if(!blocked[y]){
+            int ff=find(y);
+            f.insert(ff);
+        }
+    }
+    blocked[solve[i]]= false;
+    for(int y:g[solve[i]]){
+        if(blocked[y]) continue;
+        merge(y,solve[i]);
+    }
+    if(f.size()&gt;1){
+        ans.push_back(&quot;Red Alert: City &quot; + to_string(solve[i]) + &quot; is lost!&quot;);
+    }else{
+        ans.push_back(&quot;City &quot; + to_string(solve[i]) + &quot; is lost.&quot;);
+    }
+}
+for(int i=ans.size()-1;i&gt;=0;i--){
+    cout&lt;&lt;ans[i]&lt;&lt;endl;
+}
+
+return 0;
+</code></pre>
+
+                        </div>
+                        
+                            
+                                
+                                        
+                                                
+                                                        
+                                                                
+        </div>
+        
+            <div id="toc" class="toc-article" v-pre>
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#L2-013-%E7%BA%A2%E8%89%B2%E8%AD%A6%E6%8A%A5"><span class="toc-text">L2-013 红色警报</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-text">输入格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-text">输出格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="toc-text">输入样例：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="toc-text">输出样例：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-text">代码</span></a></li></ol>
+            </div>
+            
+    </div>
                                                         <footer id="footer">
     <div id="footer-wrap">
         <div>
@@ -285,6 +374,12 @@
 
                                 <script src="/js/main.js"></script>
                                 
+                                    
+
+
+
+
+                                        
     </body>
 
     </html>

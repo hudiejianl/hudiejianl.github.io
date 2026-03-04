@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <title>
-            Hexo 搭建与使用指南（含常用命令） | hudiejianl&#39;s blog
+            L3-020 至多删三个字符 | hudiejianl&#39;s blog
         </title>
         <meta name="author" content="hudiejianl" />
         <meta name="description" content="" />
@@ -199,7 +199,7 @@
         <div class="article-main has-toc">
             <div>
                 <h1>
-                    Hexo 搭建与使用指南（含常用命令）
+                    L3-020 至多删三个字符
                 </h1>
             </div>
             <div class="info">
@@ -207,15 +207,15 @@
                     <span class="icon">
                         <i class="fa-solid fa-calendar fa-fw"></i>
                     </span>
-                    2026/2/19
+                    2026/3/3
                 </span>
                 
                     <span class="category">
-                        <a href="/categories/%E6%95%99%E7%A8%8B/">
+                        <a href="/categories/%E7%AE%97%E6%B3%95/">
                             <span class="icon">
                                 <i class="fa-solid fa-bookmark fa-fw"></i>
                             </span>
-                            教程
+                            算法
                         </a>
                     </span>
                     
@@ -228,15 +228,15 @@
                                     
                                         <span class="tag">
                                             
-                                                <a href="/tags/Hexo/" class="tag-link">
-                                                    Hexo
+                                                <a href="/tags/%E7%AE%97%E6%B3%95/" class="tag-link">
+                                                    算法
                                                 </a>
                                         </span>
                                         
                                         <span class="tag">
                                             
-                                                <a href="/tags/Blog/" class="tag-link">
-                                                    Blog
+                                                <a href="/tags/%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B/" class="tag-link">
+                                                    团体程序设计天梯赛
                                                 </a>
                                         </span>
                                         
@@ -245,151 +245,94 @@
             </div>
             
                         <div class="content" v-pre>
-                            <h2 id="1-Hexo-是什么"><a href="#1-Hexo-是什么" class="headerlink" title="1. Hexo 是什么"></a>1. Hexo 是什么</h2><p>Hexo 是一个基于 Node.js 的静态博客框架：</p>
+                            <h2 id="L3-020-至多删三个字符"><a href="#L3-020-至多删三个字符" class="headerlink" title="L3-020 至多删三个字符"></a>L3-020 至多删三个字符</h2><p>给定一个全部由小写英文字母组成的字符串，允许你至多删掉其中 3 个字符，结果可能有多少种不同的字符串？</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在一行中给出全部由小写英文字母组成的、长度在区间 <code>[4, 10^6]</code> 内的字符串。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>在一行中输出至多删掉其中 3 个字符后不同字符串的个数。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><pre><code>ababcc
+</code></pre>
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><pre><code>25
+</code></pre>
+<p><strong>提示：</strong></p>
 <ul>
-<li>写作时用 Markdown</li>
-<li>生成时把内容编译成静态 HTML&#x2F;CSS&#x2F;JS</li>
-<li>部署时把 <code>public/</code> 推到 GitHub Pages、Vercel、服务器等</li>
+<li>删掉 0 个字符得到 <code>ababcc</code>。</li>
+<li>删掉 1 个字符得到 <code>babcc</code>、<code>aabcc</code>、<code>abbcc</code>、<code>abacc</code>、<code>ababc</code>。</li>
+<li>删掉 2 个字符得到 <code>abcc</code>、<code>bbcc</code>、<code>bacc</code>、<code>babc</code>、<code>aacc</code>、<code>aabc</code>、<code>abbc</code>、<code>abac</code>、<code>abab</code>。</li>
+<li>删掉 3 个字符得到 <code>abc</code>、<code>bcc</code>、<code>acc</code>、<code>bbc</code>、<code>bac</code>、<code>bab</code>、<code>aac</code>、<code>aab</code>、<code>abb</code>、<code>aba</code>。</li>
 </ul>
-<p>适合做个人博客、笔记站点、技术文档。</p>
-<h2 id="2-准备环境"><a href="#2-准备环境" class="headerlink" title="2. 准备环境"></a>2. 准备环境</h2><p>你需要：</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>朴素想法是：对每个字符枚举“删&#x2F;不删”，从而得到所有可能的结果字符串。但字符串长度可达 <code>10^6</code>，这种做法显然会超时。</p>
+<p>可以用动态规划统计“不同结果字符串”的数量。设 <code>dp[i][j]</code> 表示：考虑前 <code>i</code> 个字符（即 <code>s[0..i-1]</code>），恰好删除 <code>j</code> 个字符时，能够得到的<strong>不同字符串</strong>个数。</p>
+<p>不考虑去重时，转移类似于二项式计数：</p>
+<pre><code class="language-text">dp[i][j] = dp[i-1][j] + dp[i-1][j-1]
+</code></pre>
+<p>含义分别是：</p>
 <ul>
-<li>Node.js（建议 LTS）</li>
-<li>包管理器（<code>pnpm</code>&#x2F;<code>npm</code>&#x2F;<code>yarn</code> 任选其一）</li>
-<li>Git（如果要部署到 GitHub Pages）</li>
+<li><strong>不删 <code>s[i-1]</code></strong>：从 <code>dp[i-1][j]</code> 继承</li>
+<li><strong>删 <code>s[i-1]</code></strong>：从 <code>dp[i-1][j-1]</code> 继承</li>
 </ul>
-<p>检查版本：</p>
-<pre><code class="language-bash">node -v
-pnpm -v
-git --version
+<p>但这里的关键是：上述加法会对某些结果字符串产生<strong>重复计数</strong>。</p>
+<h3 id="去重思路"><a href="#去重思路" class="headerlink" title="去重思路"></a>去重思路</h3><p>当当前位置 <code>i</code> 之前存在一个与 <code>s[i]</code> 相同的字符 <code>s[j]</code>（<code>j &lt; i</code>）时，如果我们把 <code>(j, i)</code> 之间的所有字符都删除掉，那么结果字符串中这两个相同字符会“贴”在一起。此时，“保留 <code>s[i]</code>”与“保留 <code>s[j]</code>”可能产生相同的结果，从而造成重复。</p>
+<p>为了处理这类重复，记录 <code>pre[i]</code> 为 <code>s[i]</code> 上一次出现的位置（不存在则为 <code>-1</code>）。若 <code>pre[i] = j</code>，并且我们删除了 <code>i-j</code> 个字符把它们贴在一起，则需要减去这部分重复贡献，对应到转移就是：</p>
+<pre><code class="language-text">dp[i][k] -= dp[j][k-(i-j)]
 </code></pre>
-<h2 id="3-初始化一个-Hexo-博客"><a href="#3-初始化一个-Hexo-博客" class="headerlink" title="3. 初始化一个 Hexo 博客"></a>3. 初始化一个 Hexo 博客</h2><h3 id="3-1-全局安装-Hexo-CLI（可选）"><a href="#3-1-全局安装-Hexo-CLI（可选）" class="headerlink" title="3.1 全局安装 Hexo CLI（可选）"></a>3.1 全局安装 Hexo CLI（可选）</h3><p>如果你习惯全局命令：</p>
-<pre><code class="language-bash">pnpm add -g hexo-cli
+<p>这也正是代码中 <code>pre</code> 与减法项的含义。</p>
+<h3 id="参考实现（C-）"><a href="#参考实现（C-）" class="headerlink" title="参考实现（C++）"></a>参考实现（C++）</h3><pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+
+typedef long long ll;
+
+string s;
+int pre[1000005];
+ll dp[1000005][5];
+
+ll dfs(int i,int flag){
+    if(i&lt;0){
+        return flag==0;
+    }
+    if(dp[i][flag]!=0){
+        return dp[i][flag];
+    }
+    ll res=dfs(i-1,flag);
+    if(flag&gt;0){
+        res+=dfs(i-1,flag-1);
+    }
+    if(pre[i]!=-1 and flag-(i-pre[i])&gt;=0){
+        res-=dfs(pre[i]-1,flag-(i-pre[i]));
+    }
+    return dp[i][flag]=res;
+}
+
+int main() {
+    cin&gt;&gt;s;
+    map&lt;char,int&gt; flag;
+    memset(pre,-1,sizeof(pre));
+    for(int i=0;i&lt;s.size();i++){
+        if(flag.count(s[i])){
+            pre[i]=flag[s[i]];
+        }
+        flag[s[i]]=i;
+    }
+    int n=s.size();
+    dp[0][0]=1;
+    for(int i=1;i&lt;=n;i++){
+        for(int j=0;j&lt;4;j++){
+            dp[i][j]=dp[i-1][j];
+            if(j&gt;0){
+                dp[i][j]+=dp[i-1][j-1];
+            }
+            if(pre[i-1]!=-1 and j-(i-1-pre[i-1])&gt;=0){
+                dp[i][j]-=dp[pre[i-1]][j-(i-1-pre[i-1])];
+            }
+        }
+    }
+    cout&lt;&lt;dp[n][0]+dp[n][1]+dp[n][2]+dp[n][3];
+    return 0;
+}
+
 </code></pre>
-<p>之后可以直接用：</p>
-<pre><code class="language-bash">hexo -v
-</code></pre>
-<p>如果你不想全局安装，也可以用 <code>pnpm exec hexo ...</code>（下面命令会同时给两种写法）。</p>
-<h3 id="3-2-新建站点"><a href="#3-2-新建站点" class="headerlink" title="3.2 新建站点"></a>3.2 新建站点</h3><pre><code class="language-bash">hexo init my-blog
-cd my-blog
-pnpm install
-</code></pre>
-<p>启动本地服务：</p>
-<pre><code class="language-bash">hexo server
-# 或者：pnpm exec hexo server
-</code></pre>
-<p>默认访问：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a></li>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><ul>
+<li>时间复杂度：<code>O(n)</code></li>
+<li>空间复杂度：<code>O(n)</code></li>
 </ul>
-<h2 id="4-项目结构速览"><a href="#4-项目结构速览" class="headerlink" title="4. 项目结构速览"></a>4. 项目结构速览</h2><p>常见目录：</p>
-<ul>
-<li><code>source/</code>：你的内容<ul>
-<li><code>_posts/</code>：文章（每篇一个 <code>.md</code>）</li>
-<li>例如：<code>about/index.md</code>：页面（Page）</li>
-</ul>
-</li>
-<li><code>themes/</code>：主题</li>
-<li><code>_config.yml</code>：站点主配置（title、url、主题、部署等）</li>
-<li><code>public/</code>：生成后的静态文件（部署用）</li>
-</ul>
-<h2 id="5-写作：新建文章与页面"><a href="#5-写作：新建文章与页面" class="headerlink" title="5. 写作：新建文章与页面"></a>5. 写作：新建文章与页面</h2><h3 id="5-1-新建文章"><a href="#5-1-新建文章" class="headerlink" title="5.1 新建文章"></a>5.1 新建文章</h3><pre><code class="language-bash">hexo new post &quot;我的第一篇文章&quot;
-# 或者：pnpm exec hexo new post &quot;我的第一篇文章&quot;
-</code></pre>
-<p>生成文件位置：</p>
-<ul>
-<li><code>source/_posts/我的第一篇文章.md</code></li>
-</ul>
-<h3 id="5-2-新建页面（例如-about）"><a href="#5-2-新建页面（例如-about）" class="headerlink" title="5.2 新建页面（例如 about）"></a>5.2 新建页面（例如 about）</h3><pre><code class="language-bash">hexo new page about
-# 或者：pnpm exec hexo new page about
-</code></pre>
-<p>生成目录：</p>
-<ul>
-<li><code>source/about/index.md</code></li>
-</ul>
-<h2 id="6-常用命令清单（最常用）"><a href="#6-常用命令清单（最常用）" class="headerlink" title="6. 常用命令清单（最常用）"></a>6. 常用命令清单（最常用）</h2><h3 id="6-1-本地预览"><a href="#6-1-本地预览" class="headerlink" title="6.1 本地预览"></a>6.1 本地预览</h3><pre><code class="language-bash">hexo server
-# 或者：pnpm exec hexo server
-</code></pre>
-<p>常用参数：</p>
-<ul>
-<li><code>-p 4001</code>：换端口</li>
-<li><code>-o</code>：启动后自动打开浏览器</li>
-</ul>
-<h3 id="6-2-清理缓存"><a href="#6-2-清理缓存" class="headerlink" title="6.2 清理缓存"></a>6.2 清理缓存</h3><p>当你发现页面没更新、主题资源异常时，先清理：</p>
-<pre><code class="language-bash">hexo clean
-# 或者：pnpm exec hexo clean
-</code></pre>
-<h3 id="6-3-生成静态文件"><a href="#6-3-生成静态文件" class="headerlink" title="6.3 生成静态文件"></a>6.3 生成静态文件</h3><pre><code class="language-bash">hexo generate
-# 或者：pnpm exec hexo generate
-</code></pre>
-<p>输出目录：</p>
-<ul>
-<li><code>public/</code></li>
-</ul>
-<h3 id="6-4-部署"><a href="#6-4-部署" class="headerlink" title="6.4 部署"></a>6.4 部署</h3><pre><code class="language-bash">hexo deploy
-# 或者：pnpm exec hexo deploy
-</code></pre>
-<p>通常会把 <code>public/</code> 推送到你配置的远程仓库&#x2F;分支。</p>
-<h2 id="7-配置：你最常改的几个点"><a href="#7-配置：你最常改的几个点" class="headerlink" title="7. 配置：你最常改的几个点"></a>7. 配置：你最常改的几个点</h2><p>站点根配置在 <code>_config.yml</code>，常见字段：</p>
-<ul>
-<li><code>title</code>：站点标题</li>
-<li><code>subtitle</code>：副标题</li>
-<li><code>description</code>：描述（部分主题会显示）</li>
-<li><code>url</code>：你的站点域名（GitHub Pages 一定要正确）</li>
-<li><code>theme</code>：主题名（<code>themes/</code> 目录下的文件夹名）</li>
-</ul>
-<p>固定链接：</p>
-<pre><code class="language-yml">permalink: :year/:month/:day/:title/
-</code></pre>
-<h2 id="8-主题：安装与切换"><a href="#8-主题：安装与切换" class="headerlink" title="8. 主题：安装与切换"></a>8. 主题：安装与切换</h2><h3 id="8-1-安装主题"><a href="#8-1-安装主题" class="headerlink" title="8.1 安装主题"></a>8.1 安装主题</h3><p>常见方式：</p>
-<ul>
-<li>下载主题到 <code>themes/&lt;theme-name&gt;/</code></li>
-<li>在 <code>_config.yml</code> 里设置：</li>
-</ul>
-<pre><code class="language-yml">theme: &lt;theme-name&gt;
-</code></pre>
-<h3 id="8-2-主题配置"><a href="#8-2-主题配置" class="headerlink" title="8.2 主题配置"></a>8.2 主题配置</h3><p>大多数主题会在 <code>themes/&lt;theme-name&gt;/_config.yml</code> 提供主题专属配置（菜单、头像、背景、评论等）。</p>
-<h2 id="9-部署到-GitHub-Pages（一键部署）"><a href="#9-部署到-GitHub-Pages（一键部署）" class="headerlink" title="9. 部署到 GitHub Pages（一键部署）"></a>9. 部署到 GitHub Pages（一键部署）</h2><p>如果你使用 <code>hexo-deployer-git</code>，流程一般是：</p>
-<ol>
-<li>安装部署插件</li>
-</ol>
-<pre><code class="language-bash">pnpm add -D hexo-deployer-git
-</code></pre>
-<ol start="2">
-<li>配置 <code>_config.yml</code></li>
-</ol>
-<pre><code class="language-yml">deploy:
-  type: git
-  repo: git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git
-  branch: main
-</code></pre>
-<ol start="3">
-<li>执行部署</li>
-</ol>
-<pre><code class="language-bash">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy
-</code></pre>
-<p>如果你像我这个仓库一样在 <code>package.json</code> 配了脚本，也可以直接：</p>
-<pre><code class="language-bash">pnpm clean
-pnpm build
-pnpm deploy
-</code></pre>
-<h2 id="10-常见问题"><a href="#10-常见问题" class="headerlink" title="10. 常见问题"></a>10. 常见问题</h2><h3 id="10-1-部署时报权限错误"><a href="#10-1-部署时报权限错误" class="headerlink" title="10.1 部署时报权限错误"></a>10.1 部署时报权限错误</h3><p>如果 <code>repo</code> 用的是 SSH（<code>git@github.com:...</code>），要确认：</p>
-<ul>
-<li>你本机已经配置 SSH key</li>
-<li>GitHub 已添加公钥</li>
-</ul>
-<h3 id="10-2-改了内容但页面没变"><a href="#10-2-改了内容但页面没变" class="headerlink" title="10.2 改了内容但页面没变"></a>10.2 改了内容但页面没变</h3><p>按顺序排查：</p>
-<ul>
-<li><code>hexo clean</code></li>
-<li><code>hexo generate</code></li>
-<li>重新 <code>hexo server</code> 看本地是否正常</li>
-</ul>
-<h2 id="11-一条命令完成“生成-部署”"><a href="#11-一条命令完成“生成-部署”" class="headerlink" title="11. 一条命令完成“生成 + 部署”"></a>11. 一条命令完成“生成 + 部署”</h2><p>如果你已经配置好部署（例如 GitHub Pages），最常用的就是：</p>
-<pre><code class="language-bash">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy
-</code></pre>
-<p>也可以用简写：</p>
-<pre><code class="language-bash">hexo d -g
-</code></pre>
 
                         </div>
                         
@@ -403,7 +346,7 @@ pnpm deploy
         
             <div id="toc" class="toc-article" v-pre>
                 <strong class="toc-title">文章目录</strong>
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Hexo-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">1. Hexo 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%87%86%E5%A4%87%E7%8E%AF%E5%A2%83"><span class="toc-text">2. 准备环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA-Hexo-%E5%8D%9A%E5%AE%A2"><span class="toc-text">3. 初始化一个 Hexo 博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85-Hexo-CLI%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-text">3.1 全局安装 Hexo CLI（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E6%96%B0%E5%BB%BA%E7%AB%99%E7%82%B9"><span class="toc-text">3.2 新建站点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E9%80%9F%E8%A7%88"><span class="toc-text">4. 项目结构速览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%86%99%E4%BD%9C%EF%BC%9A%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0%E4%B8%8E%E9%A1%B5%E9%9D%A2"><span class="toc-text">5. 写作：新建文章与页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0"><span class="toc-text">5.1 新建文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E6%96%B0%E5%BB%BA%E9%A1%B5%E9%9D%A2%EF%BC%88%E4%BE%8B%E5%A6%82-about%EF%BC%89"><span class="toc-text">5.2 新建页面（例如 about）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%B8%85%E5%8D%95%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-text">6. 常用命令清单（最常用）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88"><span class="toc-text">6.1 本地预览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E6%B8%85%E7%90%86%E7%BC%93%E5%AD%98"><span class="toc-text">6.2 清理缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6"><span class="toc-text">6.3 生成静态文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E9%83%A8%E7%BD%B2"><span class="toc-text">6.4 部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E9%85%8D%E7%BD%AE%EF%BC%9A%E4%BD%A0%E6%9C%80%E5%B8%B8%E6%94%B9%E7%9A%84%E5%87%A0%E4%B8%AA%E7%82%B9"><span class="toc-text">7. 配置：你最常改的几个点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E4%B8%BB%E9%A2%98%EF%BC%9A%E5%AE%89%E8%A3%85%E4%B8%8E%E5%88%87%E6%8D%A2"><span class="toc-text">8. 主题：安装与切换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98"><span class="toc-text">8.1 安装主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-text">8.2 主题配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E9%83%A8%E7%BD%B2%E5%88%B0-GitHub-Pages%EF%BC%88%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2%EF%BC%89"><span class="toc-text">9. 部署到 GitHub Pages（一键部署）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">10. 常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-%E9%83%A8%E7%BD%B2%E6%97%B6%E6%8A%A5%E6%9D%83%E9%99%90%E9%94%99%E8%AF%AF"><span class="toc-text">10.1 部署时报权限错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-%E6%94%B9%E4%BA%86%E5%86%85%E5%AE%B9%E4%BD%86%E9%A1%B5%E9%9D%A2%E6%B2%A1%E5%8F%98"><span class="toc-text">10.2 改了内容但页面没变</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E4%B8%80%E6%9D%A1%E5%91%BD%E4%BB%A4%E5%AE%8C%E6%88%90%E2%80%9C%E7%94%9F%E6%88%90-%E9%83%A8%E7%BD%B2%E2%80%9D"><span class="toc-text">11. 一条命令完成“生成 + 部署”</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#L3-020-%E8%87%B3%E5%A4%9A%E5%88%A0%E4%B8%89%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="toc-text">L3-020 至多删三个字符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-text">输入格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-text">输出格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="toc-text">输入样例：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="toc-text">输出样例：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E9%87%8D%E6%80%9D%E8%B7%AF"><span class="toc-text">去重思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%AE%9E%E7%8E%B0%EF%BC%88C-%EF%BC%89"><span class="toc-text">参考实现（C++）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">复杂度</span></a></li></ol>
             </div>
             
     </div>

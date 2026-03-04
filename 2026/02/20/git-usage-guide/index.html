@@ -1,66 +1,96 @@
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="utf-8" />
-    <title>Git 使用指南：从入门到常用命令速查 | hudiejianl&#39;s blog</title>
-    <meta name="author" content="hudiejianl" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <link rel="icon" href="/images/02.png" />
-    <link rel="preconnect" href="https://s4.zstatic.net" />
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            Git 使用指南：从入门到常用命令速查 | hudiejianl&#39;s blog
+        </title>
+        <meta name="author" content="hudiejianl" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/02.png" />
+        <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-<link rel="preconnect" href="https://fonts.googleapis.cn" />
-<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
-<link
-    rel="stylesheet"
-    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
-/>
-<script> const mixins = {}; </script>
 
-<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    
+        <link rel="preconnect" href="https://fonts.googleapis.cn" />
+        <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" />
+        <script> const mixins = {}; </script>
+        
+            <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+            <script src="/js/fireworks.min.js"></script>
+            
+                
+                        
+                            <script src="/js/cursor.min.js"></script>
+                            
+                                
+                                    <script
+                                        src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+                                    
+                                        
+                                            <script
+                                                src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+                                            <script
+                                                src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+                                            <link rel="stylesheet"
+                                                href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+                                            <script src="/js/lib/highlight.js"></script>
+                                            
+                                                
+                                                    <script src="/js/lib/toc.js"></script>
+                                                    
+                                                        
+                                                                
+                                                                    <script
+                                                                        src="/js/lib/preview.js"></script>
+                                                                    
+                                                                        
+                                                                                
+                                                                                        
+                                                                                            
+                                                                                                    
+                                                                                                            
+                                                                                                                    
+                                                                                                                        
+                                                                                                                                
+                                                                                                                                    <script
+                                                                                                                                        src="/js/lib/reading-progress.js"></script>
+                                                                                                                                    
+                                                                                                                                        <link
+                                                                                                                                            rel="stylesheet"
+                                                                                                                                            href="/css/main.css" />
+    <meta name="generator" content="Hexo 8.1.1"></head>
 
+    <body>
+        
+                
+                    <canvas id="fireworks"
+                        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas>
+                    
+                        
+                            <div id="cursor"></div>
+                            
 
-<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
+                                <div id="layout">
+                                    <transition name="fade">
+                                        <div id="loading" v-show="loading">
+                                            <div id="loading-circle">
+                                                <h2>LOADING</h2>
+                                                <p>加载过慢请开启缓存 浏览器默认开启</p>
+                                                <img src="/images/loading.gif" />
+                                            </div>
+                                        </div>
+                                    </transition>
 
-
-
-<script src="/js/lib/preview.js"></script>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.css" />
-
-<meta name="generator" content="Hexo 8.1.1"></head>
-<body>
-    <div id="layout">
-        <transition name="fade">
-            <div id="loading" v-show="loading">
-                <div id="loading-circle">
-                    <h2>LOADING</h2>
-                    <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/loading.gif" />
-                </div>
-            </div>
-        </transition>
-        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+                                    <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
     <nav id="desktop-menu">
         <a class="title" href="/">
             <span>HUDIEJIANL&#39;S BLOG</span>
@@ -153,55 +183,69 @@
     <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
 </transition>
 
-        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>Git 使用指南：从入门到常用命令速查</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/2/20
-        </span>
-        
-        <span class="category">
-            <a href="/categories/%E6%95%99%E7%A8%8B/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
+
+                                        
+                                            <div id="reading-progress" class="reading-progress"
+                                                data-color="#37c6c0"
+                                                data-height="5px">
+                                                <div class="reading-progress-bar"></div>
+                                            </div>
+                                            
+
+                                                <div id="main"
+                                                    :class="loading ? 'into-enter-from': 'into-enter-active'">
+                                                    
+    <div class="article has-toc">
+        <div class="article-main has-toc">
+            <div>
+                <h1>
+                    Git 使用指南：从入门到常用命令速查
+                </h1>
+            </div>
+            <div class="info">
+                <span class="date">
+                    <span class="icon">
+                        <i class="fa-solid fa-calendar fa-fw"></i>
+                    </span>
+                    2026/2/20
                 </span>
-                教程
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
                 
-                <a href="/tags/Git/" style="color: #00a596">
-                    Git
-                </a>
-            </span>
+                    <span class="category">
+                        <a href="/categories/%E6%95%99%E7%A8%8B/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            教程
+                        </a>
+                    </span>
+                    
+                        
+                            <span class="tags">
+                                <span class="icon">
+                                    <i class="fa-solid fa-tags fa-fw"></i>
+                                </span>
+                                
+                                    
+                                        <span class="tag">
+                                            
+                                                <a href="/tags/Git/" class="tag-link">
+                                                    Git
+                                                </a>
+                                        </span>
+                                        
+                                        <span class="tag">
+                                            
+                                                <a href="/tags/%E5%B7%A5%E5%85%B7/" class="tag-link">
+                                                    工具
+                                                </a>
+                                        </span>
+                                        
+                            </span>
+                            
+            </div>
             
-            <span class="tag">
-                
-                <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #ff7d73">
-                    工具
-                </a>
-            </span>
-            
-        </span>
-        
-    </div>
-    
-    <div class="content" v-pre>
-        <h2 id="1-Git-是什么：你在解决什么问题"><a href="#1-Git-是什么：你在解决什么问题" class="headerlink" title="1. Git 是什么：你在解决什么问题"></a>1. Git 是什么：你在解决什么问题</h2><p>Git 是分布式版本控制系统，核心能力是：</p>
+                        <div class="content" v-pre>
+                            <h2 id="1-Git-是什么：你在解决什么问题"><a href="#1-Git-是什么：你在解决什么问题" class="headerlink" title="1. Git 是什么：你在解决什么问题"></a>1. Git 是什么：你在解决什么问题</h2><p>Git 是分布式版本控制系统，核心能力是：</p>
 <ul>
 <li>跟踪文件变更（历史记录）</li>
 <li>安全协作（分支、合并、Pull Request）</li>
@@ -216,6 +260,14 @@
 <li><strong>Remote</strong>：远程仓库（GitHub&#x2F;GitLab）</li>
 </ul>
 </blockquote>
+<p>如果你只想“先把日常用法跑通”，可以先看这几个最常用命令：</p>
+<ul>
+<li><code>git status</code></li>
+<li><code>git add .</code></li>
+<li><code>git commit -m &quot;...&quot;</code></li>
+<li><code>git pull</code></li>
+<li><code>git push</code></li>
+</ul>
 <h2 id="2-第一次使用：安装与基础配置"><a href="#2-第一次使用：安装与基础配置" class="headerlink" title="2. 第一次使用：安装与基础配置"></a>2. 第一次使用：安装与基础配置</h2><h3 id="2-1-检查-Git-是否可用"><a href="#2-1-检查-Git-是否可用" class="headerlink" title="2.1 检查 Git 是否可用"></a>2.1 检查 Git 是否可用</h3><pre><code class="language-bash">git --version
 </code></pre>
 <h3 id="2-2-配置用户名和邮箱（会写进提交记录）"><a href="#2-2-配置用户名和邮箱（会写进提交记录）" class="headerlink" title="2.2 配置用户名和邮箱（会写进提交记录）"></a>2.2 配置用户名和邮箱（会写进提交记录）</h3><pre><code class="language-bash">git config --global user.name &quot;hudiejianl&quot;
@@ -399,17 +451,23 @@ git reset --soft|--mixed|--hard &lt;commit&gt;
 </ul>
 <hr>
 
+                        </div>
+                        
+                            
+                                
+                                        
+                                                
+                                                        
+                                                                
+        </div>
+        
+            <div id="toc" class="toc-article" v-pre>
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Git-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9A%E4%BD%A0%E5%9C%A8%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98"><span class="toc-text">1. Git 是什么：你在解决什么问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8%EF%BC%9A%E5%AE%89%E8%A3%85%E4%B8%8E%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE"><span class="toc-text">2. 第一次使用：安装与基础配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%A3%80%E6%9F%A5-Git-%E6%98%AF%E5%90%A6%E5%8F%AF%E7%94%A8"><span class="toc-text">2.1 检查 Git 是否可用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%90%8D%E5%92%8C%E9%82%AE%E7%AE%B1%EF%BC%88%E4%BC%9A%E5%86%99%E8%BF%9B%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95%EF%BC%89"><span class="toc-text">2.2 配置用户名和邮箱（会写进提交记录）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E5%88%86%E6%94%AF%E5%90%8D%E4%B8%BA-main"><span class="toc-text">2.3（推荐）设置默认分支名为 main</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%96%B0%E5%BB%BA%E4%BB%93%E5%BA%93-%E5%85%8B%E9%9A%86%E4%BB%93%E5%BA%93"><span class="toc-text">3. 新建仓库 &#x2F; 克隆仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%9C%A8%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93"><span class="toc-text">3.1 在当前目录初始化仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%85%8B%E9%9A%86%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">3.2 克隆远程仓库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E6%97%A5%E5%B8%B8%E6%B5%81%E7%A8%8B%EF%BC%88%E5%BF%85%E4%BC%9A%EF%BC%89"><span class="toc-text">4. 最常用的日常流程（必会）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E5%B7%AE%E5%BC%82"><span class="toc-text">4.1 查看状态与差异</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%9A%82%E5%AD%98%E4%B8%8E%E6%8F%90%E4%BA%A4"><span class="toc-text">4.2 暂存与提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2"><span class="toc-text">4.3 查看提交历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E6%8B%89%E5%8F%96%E4%B8%8E%E6%8E%A8%E9%80%81"><span class="toc-text">4.4 拉取与推送</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%88%86%E6%94%AF%EF%BC%88branch%EF%BC%89%EF%BC%9A%E5%B9%B6%E8%A1%8C%E5%BC%80%E5%8F%91%E7%9A%84%E6%A0%B8%E5%BF%83"><span class="toc-text">5. 分支（branch）：并行开发的核心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%9F%A5%E7%9C%8B-%E5%88%9B%E5%BB%BA-%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="toc-text">5.1 查看&#x2F;创建&#x2F;切换分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF%EF%BC%88merge%EF%BC%89"><span class="toc-text">5.2 合并分支（merge）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E5%8F%98%E5%9F%BA%EF%BC%88rebase%EF%BC%89%EF%BC%9A%E8%AE%A9%E5%8E%86%E5%8F%B2%E6%9B%B4%E7%BA%BF%E6%80%A7"><span class="toc-text">5.3 变基（rebase）：让历史更线性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%EF%BC%88remote%EF%BC%89%EF%BC%9AGitHub-%E5%8D%8F%E4%BD%9C"><span class="toc-text">6. 远程仓库（remote）：GitHub 协作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B"><span class="toc-text">6.1 查看远程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B"><span class="toc-text">6.2 添加远程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E5%88%B0%E8%BF%9C%E7%A8%8B%E5%B9%B6%E5%BB%BA%E7%AB%8B%E8%BF%BD%E8%B8%AA"><span class="toc-text">6.3 推送本地分支到远程并建立追踪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E5%8F%AA%E6%8B%89%E5%8F%96%E4%B8%8D%E5%90%88%E5%B9%B6"><span class="toc-text">6.4 只拉取不合并</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%92%A4%E9%94%80%E4%B8%8E%E5%9B%9E%E6%BB%9A%EF%BC%88%E9%AB%98%E9%A2%91%EF%BC%81%EF%BC%89"><span class="toc-text">7. 撤销与回滚（高频！）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%92%A4%E9%94%80%E5%B7%A5%E4%BD%9C%E5%8C%BA%E6%94%B9%E5%8A%A8%EF%BC%88%E6%9C%AA-add%EF%BC%89"><span class="toc-text">7.1 撤销工作区改动（未 add）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%8F%96%E6%B6%88%E6%9A%82%E5%AD%98%EF%BC%88%E5%B7%B2-add%EF%BC%8C%E4%BD%86%E6%9C%AA-commit%EF%BC%89"><span class="toc-text">7.2 取消暂存（已 add，但未 commit）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E4%BF%AE%E6%94%B9%E6%9C%80%E8%BF%91%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%EF%BC%88%E6%9C%AA-push-%E6%97%B6%E6%9C%80%E5%AE%89%E5%85%A8%EF%BC%89"><span class="toc-text">7.3 修改最近一次提交信息（未 push 时最安全）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-%E5%9B%9E%E9%80%80%E5%88%B0%E6%9F%90%E4%B8%AA%E5%8E%86%E5%8F%B2%EF%BC%88reset%EF%BC%89"><span class="toc-text">7.4 回退到某个历史（reset）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5-%E5%8F%8D%E5%81%9A%E4%B8%80%E4%B8%AA%E6%8F%90%E4%BA%A4%EF%BC%88revert%EF%BC%8C%E9%80%82%E5%90%88%E5%B7%B2-push%EF%BC%89"><span class="toc-text">7.5 反做一个提交（revert，适合已 push）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E6%9A%82%E5%AD%98%E7%8E%B0%E5%9C%BA%EF%BC%88stash%EF%BC%89%EF%BC%9A%E4%B8%B4%E6%97%B6%E5%88%87%E5%88%86%E4%BB%BB%E5%8A%A1"><span class="toc-text">8. 暂存现场（stash）：临时切分任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Tag%EF%BC%9A%E5%8F%91%E5%B8%83%E7%89%88%E6%9C%AC"><span class="toc-text">9. Tag：发布版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%86%B2%E7%AA%81%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%88%E5%AE%9E%E6%88%98%E6%B5%81%E7%A8%8B%EF%BC%89"><span class="toc-text">10. 冲突怎么解决（实战流程）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="toc-text">11. 常用命令速查表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1-%E7%8A%B6%E6%80%81-%E6%97%A5%E5%BF%97-%E5%B7%AE%E5%BC%82"><span class="toc-text">11.1 状态 &#x2F; 日志 &#x2F; 差异</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-%E5%88%86%E6%94%AF"><span class="toc-text">11.2 分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-3-%E8%BF%9C%E7%A8%8B"><span class="toc-text">11.3 远程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-4-%E6%92%A4%E9%94%80"><span class="toc-text">11.4 撤销</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%8E%A8%E8%8D%90%E4%B8%80%E4%B8%AA%E2%80%9C%E5%A4%9F%E7%94%A8%E2%80%9D%E7%9A%84%E5%8D%8F%E4%BD%9C%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-text">12. 推荐一个“够用”的协作工作流</span></a></li></ol>
+            </div>
+            
     </div>
-    
-    
-    
-    
-    
-    
-    
-</div>
-
-            <footer id="footer">
+                                                        <footer id="footer">
     <div id="footer-wrap">
         <div>
             &copy;
@@ -427,22 +485,25 @@ git reset --soft|--mixed|--hard &lt;commit&gt;
     </div>
 </footer>
 
-        </div>
-        
-        <transition name="fade">
-            <div id="preview" ref="preview" v-show="previewShow">
-                <img id="preview-content" ref="previewContent" />
-            </div>
-        </transition>
-        
-    </div>
-    <script src="/js/main.js"></script>
-    
-    
+                                                </div>
+
+                                                
+                                                    <transition name="fade">
+                                                        <div id="preview" ref="preview" v-show="previewShow">
+                                                            <img id="preview-content" ref="previewContent" />
+                                                        </div>
+                                                    </transition>
+                                                    
+                                </div>
+
+                                <script src="/js/main.js"></script>
+                                
+                                    
 
 
 
 
-    
-</body>
-</html>
+                                        
+    </body>
+
+    </html>

@@ -1,66 +1,96 @@
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="utf-8" />
-    <title>L3-014 周游世界 | hudiejianl&#39;s blog</title>
-    <meta name="author" content="hudiejianl" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <link rel="icon" href="/images/02.png" />
-    <link rel="preconnect" href="https://s4.zstatic.net" />
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            L3-014 周游世界 | hudiejianl&#39;s blog
+        </title>
+        <meta name="author" content="hudiejianl" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/02.png" />
+        <link rel="preconnect" href="https://s4.zstatic.net" />
 <script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
 <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-<link rel="preconnect" href="https://fonts.googleapis.cn" />
-<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
-<link
-    rel="stylesheet"
-    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
-/>
-<script> const mixins = {}; </script>
 
-<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" href="/css/cursor.min.css" />
+    
+        <link rel="preconnect" href="https://fonts.googleapis.cn" />
+        <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap" />
+        <script> const mixins = {}; </script>
+        
+            <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+            <script src="/js/fireworks.min.js"></script>
+            
+                
+                        
+                            <script src="/js/cursor.min.js"></script>
+                            
+                                
+                                    <script
+                                        src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+                                    
+                                        
+                                            <script
+                                                src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+                                            <script
+                                                src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+                                            <link rel="stylesheet"
+                                                href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css" />
+                                            <script src="/js/lib/highlight.js"></script>
+                                            
+                                                
+                                                    <script src="/js/lib/toc.js"></script>
+                                                    
+                                                        
+                                                                
+                                                                    <script
+                                                                        src="/js/lib/preview.js"></script>
+                                                                    
+                                                                        
+                                                                                
+                                                                                        
+                                                                                            
+                                                                                                    
+                                                                                                            
+                                                                                                                    
+                                                                                                                        
+                                                                                                                                
+                                                                                                                                    <script
+                                                                                                                                        src="/js/lib/reading-progress.js"></script>
+                                                                                                                                    
+                                                                                                                                        <link
+                                                                                                                                            rel="stylesheet"
+                                                                                                                                            href="/css/main.css" />
+    <meta name="generator" content="Hexo 8.1.1"></head>
 
+    <body>
+        
+                
+                    <canvas id="fireworks"
+                        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"></canvas>
+                    
+                        
+                            <div id="cursor"></div>
+                            
 
-<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
+                                <div id="layout">
+                                    <transition name="fade">
+                                        <div id="loading" v-show="loading">
+                                            <div id="loading-circle">
+                                                <h2>LOADING</h2>
+                                                <p>加载过慢请开启缓存 浏览器默认开启</p>
+                                                <img src="/images/loading.gif" />
+                                            </div>
+                                        </div>
+                                    </transition>
 
-
-
-<script src="/js/lib/preview.js"></script>
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/css/main.css" />
-
-<meta name="generator" content="Hexo 8.1.1"></head>
-<body>
-    <div id="layout">
-        <transition name="fade">
-            <div id="loading" v-show="loading">
-                <div id="loading-circle">
-                    <h2>LOADING</h2>
-                    <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/images/loading.gif" />
-                </div>
-            </div>
-        </transition>
-        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+                                    <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
     <nav id="desktop-menu">
         <a class="title" href="/">
             <span>HUDIEJIANL&#39;S BLOG</span>
@@ -153,55 +183,69 @@
     <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
 </transition>
 
-        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>L3-014 周游世界</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2026/2/21
-        </span>
-        
-        <span class="category">
-            <a href="/categories/%E7%AE%97%E6%B3%95/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
+
+                                        
+                                            <div id="reading-progress" class="reading-progress"
+                                                data-color="#37c6c0"
+                                                data-height="5px">
+                                                <div class="reading-progress-bar"></div>
+                                            </div>
+                                            
+
+                                                <div id="main"
+                                                    :class="loading ? 'into-enter-from': 'into-enter-active'">
+                                                    
+    <div class="article has-toc">
+        <div class="article-main has-toc">
+            <div>
+                <h1>
+                    L3-014 周游世界
+                </h1>
+            </div>
+            <div class="info">
+                <span class="date">
+                    <span class="icon">
+                        <i class="fa-solid fa-calendar fa-fw"></i>
+                    </span>
+                    2026/2/21
                 </span>
-                算法
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
                 
-                <a href="/tags/%E7%AE%97%E6%B3%95/" style="color: #00bcd4">
-                    算法
-                </a>
-            </span>
+                    <span class="category">
+                        <a href="/categories/%E7%AE%97%E6%B3%95/">
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw"></i>
+                            </span>
+                            算法
+                        </a>
+                    </span>
+                    
+                        
+                            <span class="tags">
+                                <span class="icon">
+                                    <i class="fa-solid fa-tags fa-fw"></i>
+                                </span>
+                                
+                                    
+                                        <span class="tag">
+                                            
+                                                <a href="/tags/%E7%AE%97%E6%B3%95/" class="tag-link">
+                                                    算法
+                                                </a>
+                                        </span>
+                                        
+                                        <span class="tag">
+                                            
+                                                <a href="/tags/%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B/" class="tag-link">
+                                                    团体程序设计天梯赛
+                                                </a>
+                                        </span>
+                                        
+                            </span>
+                            
+            </div>
             
-            <span class="tag">
-                
-                <a href="/tags/%E5%9B%A2%E4%BD%93%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%A4%A9%E6%A2%AF%E8%B5%9B/" style="color: #00a596">
-                    团体程序设计天梯赛
-                </a>
-            </span>
-            
-        </span>
-        
-    </div>
-    
-    <div class="content" v-pre>
-        <h2 id="L3-014-周游世界"><a href="#L3-014-周游世界" class="headerlink" title="L3-014 周游世界"></a>L3-014 周游世界</h2><p> 周游世界是件浪漫事，但规划旅行路线就不一定了…… 全世界有成千上万条航线、铁路线、大巴线，令人眼花缭乱。所以旅行社会选择部分运输公司组成联盟，每家公司提供一条线路，然后帮助客户规划由联盟内企业支持的旅行路线。本题就要求你帮旅行社实现一个自动规划路线的程序，使得对任何给定的起点和终点，可以找出最顺畅的路线。所谓“最顺畅”，首先是指中途经停站最少；如果经停站一样多，则取需要换乘线路次数最少的路线。</p>
+                        <div class="content" v-pre>
+                            <h2 id="L3-014-周游世界"><a href="#L3-014-周游世界" class="headerlink" title="L3-014 周游世界"></a>L3-014 周游世界</h2><p>周游世界是件浪漫事，但规划旅行路线就不一定了…… 全世界有成千上万条航线、铁路线、大巴线，令人眼花缭乱。所以旅行社会选择部分运输公司组成联盟，每家公司提供一条线路，然后帮助客户规划由联盟内企业支持的旅行路线。本题就要求你帮旅行社实现一个自动规划路线的程序，使得对任何给定的起点和终点，可以找出最顺畅的路线。所谓“最顺畅”，首先是指中途经停站最少；如果经停站一样多，则取需要换乘线路次数最少的路线。</p>
 <h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>输入在第一行给出一个正整数<em>N</em>（≤100），即联盟公司的数量。接下来有<em>N</em>行，第<em>i</em>行（<em>i</em>&#x3D;1,⋯,<em>N</em>）描述了第<em>i</em>家公司所提供的线路。格式为：</p>
 <p><em>M</em> S[1] S[2] ⋯ S[<em>M</em>]</p>
 <p>其中<em>M</em>（≤100）是经停站的数量，S[<em>i</em>]（<em>i</em>&#x3D;1,⋯,<em>M</em>）是经停站的编号（由4位0-9的数字组成）。这里假设每条线路都是简单的一条可以双向运行的链路，并且输入保证是按照正确的经停顺序给出的 —— 也就是说，任意一对相邻的S[<em>i</em>]和S[<em>i</em>+1]（<em>i</em>&#x3D;1,⋯,<em>M</em>−1）之间都不存在其他经停站点。我们称相邻站点之间的线路为一个运营区间，每个运营区间只承包给一家公司。环线是有可能存在的，但不会不经停任何中间站点就从出发地回到出发地。当然，不同公司的线路是可能在某些站点有交叉的，这些站点就是客户的换乘点，我们假设任意换乘点涉及的不同公司的线路都不超过5条。</p>
@@ -465,17 +509,23 @@ int main() {
 <li>输出只包含起点&#x2F;换乘点&#x2F;终点：用“公司变化点”切段。</li>
 </ol>
 
+                        </div>
+                        
+                            
+                                
+                                        
+                                                
+                                                        
+                                                                
+        </div>
+        
+            <div id="toc" class="toc-article" v-pre>
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#L3-014-%E5%91%A8%E6%B8%B8%E4%B8%96%E7%95%8C"><span class="toc-text">L3-014 周游世界</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-text">输入格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-text">输出格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="toc-text">输入样例：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B%EF%BC%9A"><span class="toc-text">输出样例：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%BB%BA%E6%A8%A1"><span class="toc-text">1) 建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E2%80%9C%E5%8F%AA%E7%94%A8%E7%BB%8F%E5%81%9C%E7%AB%99%E6%95%B0%E2%80%9D%E4%BC%9A%E8%B6%85%E6%97%B6"><span class="toc-text">2) 为什么“只用经停站数”会超时</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%8A%B6%E6%80%81%E8%AE%BE%E8%AE%A1%EF%BC%88%E6%8E%A8%E8%8D%90%E5%86%99%E6%B3%95%EF%BC%89"><span class="toc-text">3) 状态设计（推荐写法）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%B7%AF%E5%BE%84%E8%AE%B0%E5%BD%95%E4%B8%8E%E8%BE%93%E5%87%BA%EF%BC%88%E5%8F%AA%E8%BE%93%E5%87%BA%E8%B5%B7%E7%82%B9-%E6%8D%A2%E4%B9%98%E7%82%B9-%E7%BB%88%E7%82%B9%EF%BC%89"><span class="toc-text">4) 路径记录与输出（只输出起点&#x2F;换乘点&#x2F;终点）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%8F%82%E8%80%83%E5%AE%9E%E7%8E%B0%EF%BC%88C-%EF%BC%89"><span class="toc-text">5) 参考实现（C++）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">6) 复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%B8%B8%E8%A7%81%E5%9D%91%E7%82%B9"><span class="toc-text">7) 常见坑点</span></a></li></ol></li></ol>
+            </div>
+            
     </div>
-    
-    
-    
-    
-    
-    
-    
-</div>
-
-            <footer id="footer">
+                                                        <footer id="footer">
     <div id="footer-wrap">
         <div>
             &copy;
@@ -493,22 +543,25 @@ int main() {
     </div>
 </footer>
 
-        </div>
-        
-        <transition name="fade">
-            <div id="preview" ref="preview" v-show="previewShow">
-                <img id="preview-content" ref="previewContent" />
-            </div>
-        </transition>
-        
-    </div>
-    <script src="/js/main.js"></script>
-    
-    
+                                                </div>
+
+                                                
+                                                    <transition name="fade">
+                                                        <div id="preview" ref="preview" v-show="previewShow">
+                                                            <img id="preview-content" ref="previewContent" />
+                                                        </div>
+                                                    </transition>
+                                                    
+                                </div>
+
+                                <script src="/js/main.js"></script>
+                                
+                                    
 
 
 
 
-    
-</body>
-</html>
+                                        
+    </body>
+
+    </html>
